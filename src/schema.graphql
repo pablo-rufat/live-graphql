@@ -8,6 +8,7 @@ type Query {
 
   user(id: ID!): User
   users: [User]!
+  userFromToken: User
 }
 
 type Mutation {

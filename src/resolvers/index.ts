@@ -12,6 +12,7 @@ export const resolvers = {
     chaptersByStatus: chapterResolvers.Query.chaptersByStatus,
     user: userResolvers.Query.user,
     users: userResolvers.Query.users,
+    userFromToken: userResolvers.Query.userFromToken,
   },
   Mutation: {
     createChapter: chapterResolvers.Mutation.createChapter,

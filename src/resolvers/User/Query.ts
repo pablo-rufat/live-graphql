@@ -14,4 +14,15 @@ export const Query = {
     return userRepository.find();
 
   },
+  userFromToken: async (parent: any, args: any, context: any): Promise<User | null> => {
+
+    if (!context.userId) {
+      return null;
+    }
+
+    const userRepository = getRepository(User);
+
+    return userRepository.findOne(context.userId);
+
+  }
 };

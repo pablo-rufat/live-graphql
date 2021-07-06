@@ -2,8 +2,13 @@ import { AuthenticationError } from "apollo-server";
 import { verify } from "jsonwebtoken";
 import { ConnectionOptions } from "typeorm";
 import * as dotenv from "dotenv";
+import * as path from "path";
 
-dotenv.config();
+if (process.env.NODE_ENV === "production") {
+  dotenv.config();
+} else {
+  dotenv.config({ path: path.join(__dirname, `../.env-${process.env.NODE_ENV}`) });
+}
 
 export const getUserId = (req: any): string => {
 
