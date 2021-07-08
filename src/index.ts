@@ -5,8 +5,6 @@ import * as path from 'path';
 import { resolvers } from "./resolvers";
 import { getUserId, typeormOptions } from "./utils";
 
-console.log(process.env.DATABASE_URL);
-
 createConnection(typeormOptions).then( async connection => {
 
   const server = new ApolloServer({
