@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { Status } from "../types";
 import { User } from "./User";
 import { Vote } from "./Vote";
