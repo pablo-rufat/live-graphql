@@ -5,16 +5,14 @@ import * as path from 'path';
 import { resolvers } from "./resolvers";
 import { getUserId } from "./utils";
 import * as dotenv from "dotenv";
+import { typeDefs } from "./typeDefs";
 
 dotenv.config();
 
 createConnection().then( async connection => {
 
   const server = new ApolloServer({
-    typeDefs: fs.readFileSync(
-      path.join(__dirname, 'schema.graphql'),
-      'utf8'
-    ),
+    typeDefs,
     resolvers,
     context: ({ req }) => {
       return {
