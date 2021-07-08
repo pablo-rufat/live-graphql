@@ -1,20 +1,20 @@
 module.exports = {
   type: "postgres",
-  url: process.env.DATABASE_URI,
+  url: process.env.DATABASE_URL,
   synchronize: true,
   logging: false,
   entities: [
-     "src/entity/**/*.ts"
+     process.env.NODE_ENV === "development" ? "src/entity/**/*.ts" : "build/entity/**/*.js"
   ],
   migrations: [
-     "src/migration/**/*.ts"
+   process.env.NODE_ENV === "development" ? "src/migration/**/*.ts" : "build/migration/**/*.js"
   ],
   subscribers: [
-     "src/subscriber/**/*.ts"
+   process.env.NODE_ENV === "development" ? "src/subscriber/**/*.ts" : "build/subscriber/**/*.js"
   ],
   cli: {
-     "entitiesDir": "src/entity",
-     "migrationsDir": "src/migration",
-     "subscribersDir": "src/subscriber"
+     "entitiesDir": process.env.NODE_ENV === "development" ? "src/entity" : "build/entity",
+     "migrationsDir": process.env.NODE_ENV === "development" ? "src/migration" : "build/migration",
+     "subscribersDir": process.env.NODE_ENV === "development" ? "src/subscriber" : "build/subscriber"
   }
 };
