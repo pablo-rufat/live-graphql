@@ -3,9 +3,14 @@ import { createConnection } from "typeorm";
 import * as fs from 'fs';
 import * as path from 'path';
 import { resolvers } from "./resolvers";
-import { getUserId, typeormOptions } from "./utils";
+import { getUserId } from "./utils";
+import * as dotenv from "dotenv";
 
-createConnection(typeormOptions).then( async connection => {
+if (process.env.NODE_ENV === "development") {
+  dotenv.config();
+}
+
+createConnection().then( async connection => {
 
   const server = new ApolloServer({
     typeDefs: fs.readFileSync(
