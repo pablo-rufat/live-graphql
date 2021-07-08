@@ -28,7 +28,9 @@ createConnection().then( async connection => {
   });
 
   server
-    .listen()
+    .listen({
+      port: process.env.PORT || 4000,
+    })
     .then(
       ({ url }) => console.log(`Server rodando em ${url}`)
     );
