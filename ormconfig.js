@@ -3,6 +3,11 @@ module.exports = {
   url: process.env.DATABASE_URL,
   synchronize: true,
   logging: false,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false
+    }
+  },
   entities: [
      process.env.NODE_ENV === "development" ? "src/entity/**/*.ts" : "build/entity/**/*.js"
   ],
