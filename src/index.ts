@@ -6,9 +6,7 @@ import { resolvers } from "./resolvers";
 import { getUserId } from "./utils";
 import * as dotenv from "dotenv";
 
-if (process.env.NODE_ENV === "development") {
-  dotenv.config();
-}
+dotenv.config();
 
 createConnection().then( async connection => {
 
