@@ -23,8 +23,8 @@ createConnection().then( async connection => {
             : null
       }
     },
-    introspection: process.env.NODE_ENV === "development",
-    playground: process.env.NODE_ENV === "development",
+    introspection: process.env.NODE_ENV === "production", // TODO: change to development
+    playground: process.env.NODE_ENV === "production", // TODO: change to development
   });
 
   server
