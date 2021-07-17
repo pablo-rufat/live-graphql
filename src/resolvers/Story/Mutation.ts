@@ -31,7 +31,7 @@ export const Mutation = {
       throw new UserInputError("There is an story for this language already");
     }
 
-    if (!args.text || args.text.trim() === "" || args.text.length > 1000) {
+    if (!args.text || args.text.trim() === "" || args.text.length > 5000) {
       throw new UserInputError("Invalid text");
     }
 
