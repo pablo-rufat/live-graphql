@@ -7,6 +7,8 @@ import { AuthenticationError, UserInputError } from "apollo-server";
 export const Mutation = {
   createStory: async (parent: any, args: any, context: any): Promise<Story> => {
 
+    console.log(args); // TODO: REMOVE
+
     if (!context.userId) {
       throw new AuthenticationError("Unauthorized");
     }
