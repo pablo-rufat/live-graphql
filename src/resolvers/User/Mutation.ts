@@ -47,14 +47,18 @@ export const Mutation = {
       throw new UserInputError("Invalid chapter id");
     }
 
-    const chapterRepository = getRepository(Chapter);
-    const chapter = await chapterRepository.findOne(args.chapterId);
+    if (args.chapterId === "remove") {
+      user.bookmark = "";
+    } else {
+      const chapterRepository = getRepository(Chapter);
+      const chapter = await chapterRepository.findOne(args.chapterId);
 
-    if (!chapter) {
-      throw new UserInputError("Invalid chapter id");
+      if (!chapter) {
+        throw new UserInputError("Invalid chapter id");
+      }
+
+      user.bookmark = args.chapterId;
     }
-
-    user.bookmark = args.chapterId;
 
     userRepository.save(user);
 
