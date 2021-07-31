@@ -4,7 +4,7 @@ import { verify } from "jsonwebtoken";
 export const checkAPIKey = (req: any) => {
   const keyHeader = req.headers.X_API_KEY;
 
-  console.log("X_API_KEY:", keyHeader);
+  console.log("headers:", req.headers);
 
   if (!keyHeader || keyHeader !== process.env.API_KEY) {
     throw new ForbiddenError("Invalid API key");
