@@ -1,11 +1,13 @@
-import { AuthenticationError } from "apollo-server";
+import { AuthenticationError, ForbiddenError } from "apollo-server";
 import { verify } from "jsonwebtoken";
 
 export const checkAPIKey = (req: any) => {
   const keyHeader = req.headers.X_API_KEY;
 
+  console.log("X_API_KEY:", keyHeader);
+
   if (!keyHeader || keyHeader !== process.env.API_KEY) {
-    throw new AuthenticationError("Unauthorized");
+    throw new ForbiddenError("Invalid API key");
   }
 };
 
