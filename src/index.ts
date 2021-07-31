@@ -3,7 +3,7 @@ import { createConnection } from "typeorm";
 import * as fs from 'fs';
 import * as path from 'path';
 import { resolvers } from "./resolvers";
-import { getUserId } from "./utils";
+import { checkAPIKey, getUserId } from "./utils";
 import * as dotenv from "dotenv";
 import { typeDefs } from "./typeDefs";
 
@@ -15,6 +15,7 @@ createConnection().then( async connection => {
     typeDefs,
     resolvers,
     context: ({ req }) => {
+      checkAPIKey(req);
       return {
         ...req,
         userId:

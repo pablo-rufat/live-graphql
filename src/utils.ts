@@ -1,6 +1,14 @@
 import { AuthenticationError } from "apollo-server";
 import { verify } from "jsonwebtoken";
 
+export const checkAPIKey = (req: any) => {
+  const keyHeader = req.headers.X_API_KEY;
+
+  if (!keyHeader || keyHeader !== process.env.API_KEY) {
+    throw new AuthenticationError("Unauthorized");
+  }
+};
+
 export const getUserId = (req: any): string => {
 
   const authHeader = req.headers.authorization;
