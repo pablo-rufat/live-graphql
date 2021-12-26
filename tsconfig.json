@@ -12,5 +12,7 @@
      "experimentalDecorators": true,
      "sourceMap": true,
      "esModuleInterop": true,
-  }
+  },
+  "include": ["src/**/*.ts", "ormconfig.ts"],
+  "exclude": ["node_modules", "build"]
 }
