@@ -1,7 +1,7 @@
 module.exports = {
     apps : [{
       name: 'Writers',
-      script: 'src/index.ts',
+      script: 'npm start',
       instances: 'max',
       max_memory_restart: '256M',
       env: {
