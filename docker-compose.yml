@@ -1,20 +1,54 @@
-version: "3"
-services:
-  app:
-    build: .
-    depends_on:
-      - postgres
-    ports:
-      - "4000:4000"
-    volumes:
-      - .:/app/
-      - /app/node_modules
+version: '3.8'
 
-  postgres:
-    image: postgres:10.4
-    ports:
-      - "5432:5432"
+services:
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    env_file: ./.env
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_DATABASE=$DB_NAME
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - mysql-compose-network
+  app:
+    image: node:16
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $PORT:$PORT
+    environment:
+      - DB_HOST=$DB_HOST
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_NAME
+      - DB_PORT=$DB_PORT
+      - APP_SECRET=$APP_SECRET
+      - PORT=$PORT
+      - API_KEY=$API_KEY
+      - NODE_ENV=$NODE_ENV
+    stdin_open: true
+    tty: true
+    networks:
+      - mysql-compose-network
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - mysql-compose-network
+
+networks: 
+  mysql-compose-network:
+    driver: bridge
+
+volumes: 
+  db:

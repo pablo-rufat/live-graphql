@@ -1,15 +1,15 @@
-FROM node:latest
+FROM node:16
 
 WORKDIR /app
 
-COPY ./package.json .
-COPY ./package-lock.json .
+COPY package.json /app
 
-RUN npm install
 RUN npm install -g ts-node
 
-COPY . .
+RUN npm install
+
+COPY . /app
 
 EXPOSE 4000
 
-CMD npm run build && npm start
+CMD npm start
